@@ -6,7 +6,7 @@ const vid = document.getElementById('v');
 const I = {};
 const SRCS = {
   intro: 'data/png/intro.png', bg: 'data/png/bg.png', ready: 'data/png/ready_to_hack.png',
-  g1: 'data/png/game1.png', g2: 'data/png/game2.png', g3: 'data/png/game3.png',
+  game: 'data/png/game_sprite.png',
   ninja: 'data/png/ninja_game.png', rope: 'data/png/rope.png',
   start: 'data/png/start.png', hs: 'data/png/highscore.png',
   sel: 'data/png/ninja.png', cd: 'data/png/countdown.png'
@@ -196,7 +196,7 @@ function drawCountdown(dt) {
 function drawGame(dt) {
   if ((timeLeft -= dt) <= 0) { timeLeft = 0; return endGame(); }
   ninjaProgress = 1 - timeLeft / DURATION;
-  ctx.drawImage([I.g1, I.g2, I.g3][pawnFrame-1], 0, 0, W, H);
+  ctx.drawImage(I.game, (pawnFrame-1) * W, 0, W, H, 0, 0, W, H);
   const rh = H - 60, rw = 21 * H / 554, rx = W - 140 - rw;
   ctx.drawImage(I.rope, rx, 0, rw, rh);
   const [nw, nh] = [176, 224];
