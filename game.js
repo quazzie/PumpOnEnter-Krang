@@ -102,7 +102,7 @@ document.addEventListener('keydown', e => {
   if (e.key === 'F2') { if (screen === 'result' && !scoreSaved && pendingScore !== null) savePendingScore(); return; }
   if (e.key === 'Enter') {
     e.preventDefault();
-    if (screen === 'game') { pressQueue++; return; }
+    if (screen === 'game') { if (!e.repeat) pressQueue++; return; }
     if (screen === 'result' || screen === 'highscore') return;
     activate();
   }
