@@ -5,7 +5,7 @@ const vid = document.getElementById('v');
 
 const I = {};
 const SRCS = {
-  intro: 'data/png/intro.png', bg: 'data/png/bg.png', ready: 'data/png/ready_to_hack.png',
+  intro: 'data/png/intro.png', ready: 'data/png/ready_to_hack.png',
   game: 'data/png/game_sprite.png',
   ninja: 'data/png/ninja_game.png', rope: 'data/png/rope.png',
   start: 'data/png/start.png', hs: 'data/png/highscore.png',
@@ -54,6 +54,8 @@ const menuItems = [
   { img: () => I.start, cx: 360, cy: 480, w: 131, h: 42 },
   { img: () => I.hs,    cx: 360, cy: 530, w: 242, h: 45 }
 ];
+
+function drawBg() { ctx.drawImage(I.game, 2*W, 0, W, H, 0, 0, W, H); }
 
 function hideVideo() { vid.style.display = 'none'; vid.src = ''; vid.onended = null; }
 function showVideo(source, context, onEnd) {
@@ -172,7 +174,7 @@ function drawIntro(dt) {
 
 function drawMenu(dt) {
   waveT += dt * 3;
-  ctx.drawImage(I.bg, 0, 0, W, H);
+  drawBg();
   menuItems.forEach(({ img, cx, cy, w, h }, i) => {
     wave(img(), cx, cy, w, h, waveT);
     if (menuSel !== i) return;
@@ -204,7 +206,7 @@ function drawGame(dt) {
 }
 
 function drawResult() {
-  ctx.drawImage(I.bg, 0, 0, W, H);
+  drawBg();
   ctx.fillStyle = 'rgba(0,0,0,0.88)'; ctx.fillRect(0, 0, W, H);
   text('RESULTAT', W/2, 130, 'bold 48px "Courier New"', '#e94560', '#e94560');
   text(score, W/2, 280, 'bold 120px "Courier New"', '#ffe600', '#ffe600');
@@ -222,7 +224,7 @@ function drawVideo() {
 }
 
 function drawHighscore() {
-  ctx.drawImage(I.bg, 0, 0, W, H);
+  drawBg();
   ctx.fillStyle = 'rgba(0,0,0,0.82)'; ctx.fillRect(0, 0, W, H);
   text('HIGHSCORES', W/2, 100, 'bold 36px "Courier New"', '#e94560', '#e94560');
   if (!scores.length) text('Inga scores ännu', W/2, 280, '20px "Courier New"', '#888');
